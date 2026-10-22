@@ -1,0 +1,21 @@
+# U-Boot 自动启动脚本源（mkimage 打包为 boot.scr 后写入 sd.img p1 分区）
+#
+# 重要：fdt rm 删除 uart0 的 bluetooth 子节点。
+# 原因：bcm2837-rpi-3-b.dtb 中 /soc/serial@7e201000 存在 bluetooth
+# (brcm,bcm43438-bt) 子节点，内核据此把 ttyAMA0 注册为 serdev 控制器，
+# 蓝牙驱动 probe 后接管该串口的 RX 数据（吞掉输入字符并关闭回显），
+# 导致 console 串口输入完全无响应（输出正常、中断正常）。
+# QEMU raspi3b 无蓝牙硬件，该节点必须删除后串口输入才可用。
+# 验证：删除后 shell 命令回显与执行恢复正常。
+echo "=== auto boot ==="
+fatload mmc 0:1 ${loadaddr} Image
+fatload mmc 0:1 0x3b000000 bcm2837-rpi-3-b.dtb
+fdt addr 0x3b000000
+fdt rm /soc/serial@7e201000/bluetooth
+# 主流程：p2 ext4 持久化 rootfs（rw，写盘可保留）
+setenv bootargs "console=ttyAMA0,115200 root=/dev/mmcblk0p2 rw rootwait"
+booti ${loadaddr} - 0x3b000000
+# 兜底（cpio 内存盘，不持久化）：U-Boot 命令行手动执行
+#   fatload mmc 0:1 0x3a000000 initramfs.cpio
+#   setenv bootargs "console=ttyAMA0,115200 rdinit=/bin/sh"
+#   booti ${loadaddr} 0x3a000000:${filesize} 0x3b000000

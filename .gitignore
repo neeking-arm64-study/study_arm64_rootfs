@@ -1,0 +1,10 @@
+# 打包输出产物，不提交git
+output/
+*.cpio
+*.ext4
+*.img
+
+# 临时文件
+*~
+*.swp
+skeleton/bin/

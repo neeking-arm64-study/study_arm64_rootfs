@@ -1,0 +1,7 @@
+# known-good 版本锁（稳定版机架包配套）
+# stable/deps/ 中每个二进制 + boot.src 对应源码仓 HEAD hash
+# 更新：改了 kernel/uboot/boot.src → 重编/修改 → 拷 stable/deps/ → 更新本文件 → commit
+# 换电脑：clone 本仓 + 按本文件 checkout 三仓 HEAD → 可复现完整源码基线
+kernel=9388003786513d7c8317c7c341f0fe3ecf0b47dc    # → Image, bcm2837-rpi-3-b.dtb, u-boot.bin
+rootfs=954b57bf62efcd65537ae587b9819291149ec231    # 本仓自身（boot.src, skeleton, sdimg.py, build_sd.sh）
+uboot=712cbcda04827a2da953d0353ec3323e2cbb7af7    # → mkimage
