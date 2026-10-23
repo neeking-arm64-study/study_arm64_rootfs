@@ -45,7 +45,7 @@ for f in ${KIMAGE} ${KDTB} ${MKIMAGE} ${BOOTSRC} skeleton/bin/busybox; do
 done
 
 # 1. 刷新兜底 initramfs.cpio（复用本工程既有脚本，免 root）
-./build_raspi3b_rootfs.sh cpio
+./build_rootfs.sh cpio
 
 # 2. 打包 boot.scr（tr 去 CR：boot.src 若带 CRLF 行尾，\r 会并入命令行
 #    尾参数，导致 U-Boot 按 "Image\r" 找不到文件，报 Failed to load）

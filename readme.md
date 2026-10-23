@@ -42,7 +42,7 @@ rootfs_test_dir/raspi3b_rootfs/
 ├── output/sd.img                build_sd.sh 一键产出（.gitignore，验证充分后 cp stable/release/）
 ├── build_sd.sh                  组装 sd.img（只读 skeleton + stable/deps/，不往里写任何东西）
 ├── sdimg.py                     FAT32 / MBR 直写工具（纯 Python，免 root）
-└── build_raspi3b_rootfs.sh      cpio 打包（被 build_sd.sh 调用，ext4 分支已废弃）
+└── build_rootfs.sh      cpio 打包（被 build_sd.sh 调用，ext4 分支已废弃）
 ```
 
 ## deps/ vs release/ 的区别
