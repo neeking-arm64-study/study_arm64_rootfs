@@ -1,4 +1,4 @@
-# raspi3b ca53 rootfs 工程（最终预览模板 + 稳定版本机架包）
+# raspi3b ca53 rootfs 工程（稳定版本机架包）
 
 本仓 = raspi3b aarch64 QEMU 启动时挂载的 **rootfs 文件系统快照** + 稳定版本机架包。
 clone 本仓即可产出可启动 sd.img（stable/deps/ 自带所有外部依赖二进制和 boot.src）。
